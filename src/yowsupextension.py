@@ -15,7 +15,8 @@ class YowsupExtension(DependencyProvider):
 
         self.shell = pexpect.spawn(startCommand)
         self.expect([".+\[offline\]:"])
-        self.shell.sendline("/L")
+        strLogin = '/login %s %s' % (number, password)
+        self.shell.sendline(strLogin)
         login = self.expect([".+\[connected\]:","Login Failed"],5)
         if(login == 2):
             logging.info('Cannot login....cannot continue')

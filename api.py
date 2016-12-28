@@ -21,7 +21,7 @@ def send():
         # asynchronously spawning and email notification
         rpc.yowsup.send(type,body,address)
 
-    msg = "The message was sucessfully sended to the queue"
+    msg = "OK"
     return msg, 200
 
-app.run(debug=True)
+app.run(host='0.0.0.0', port=5000, debug=True)
