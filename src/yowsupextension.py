@@ -22,10 +22,13 @@ class YowsupExtension(DependencyProvider):
             logging.info('Cannot login....cannot continue')
             exit()
 
-
-
-
         return True
+
+    def login(self, number, password):
+        logging.info('Trying to login via %s %s'  % (number, password))
+        startCommand = '/login %s %s' % (number, password)
+        self.shell.sendline(startCommand)
+        logging.info('Connect')
 
     def expect(self,expectArr,timeout = 1):
         try:
