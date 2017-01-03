@@ -15,7 +15,6 @@ class yowsup(object):
         logging.info('Get message: %s,%s,%s' % (type, body, address))
         output = self.y.sendTextMessage(address, body)
 
-
         return True
         #pprint(self)
         #logging.info(self.y)

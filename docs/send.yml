@@ -16,10 +16,10 @@ parameters:
           default: 'simple'
         body:
           type: string
-          default: 'This is a test Message'
+          default: 'Es un mensaje de prueba'
         address:
           type: string
-          default: '490176xxxxxx'
+          default: '521......'
 
 responses:
   200:

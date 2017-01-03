@@ -2,7 +2,7 @@ from flask import Flask, request
 from flasgger import Swagger
 from nameko.standalone.rpc import ClusterRpcProxy
 from flasgger.utils import swag_from
-import logging
+import logging, subprocess, signal, os
 app = Flask(__name__)
 Swagger(app)
 CONFIG = {'AMQP_URI': "amqp://guest:guest@localhost"}
@@ -12,6 +12,7 @@ CONFIG = {'AMQP_URI': "amqp://guest:guest@localhost"}
 @swag_from('docs/send.yml')
 def send():
     logger = app.logger
+    process = subprocess.Popen('./startservice.sh', shell=True, stdout=subprocess.PIPE, preexec_fn=os.setsid)
 
     try:
         type = request.json.get('type')
@@ -24,6 +25,8 @@ def send():
     with ClusterRpcProxy(CONFIG) as rpc:
         # asynchronously spawning and email notification
         rpc.yowsup.send(type,body,address)
+
+    os.killpg(os.getpgid(process.pid), signal.SIGTERM)
 
     msg = "OK"
     return msg, 200
