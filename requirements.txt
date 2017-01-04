@@ -1,0 +1,5 @@
+yowsup2==2.5.0
+Flask==0.12
+nameko==2.5.0
+flasgger==0.5.14
+Twisted==16.6.0

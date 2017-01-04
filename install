@@ -1,0 +1,14 @@
+
+Es necesario rabbitmq como backend para la comunicación entre paquetes.
+
+dnf update
+dnf install rabbitmq-server
+
+##Instalar requirements##
+pip install -r requirements.txt
+
+##iniciar servicios##
+./startapi.sh
+./startservice.sh #Es necesario twisted para iniciar el servicio, vease requirements.txt
+
+Si se desea detener el servicio, es necesario "matar" manualmente el proceso.
