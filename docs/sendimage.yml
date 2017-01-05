@@ -16,10 +16,10 @@ parameters:
           default: 'simple'
         body:
           type: string
-          default: 'Es un mensaje de prueba'
+          default: '/ruta/imagen'
         address:
           type: string
-          default: '521......'
+          default: '521.....'
 
 responses:
   200:
