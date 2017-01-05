@@ -11,7 +11,6 @@ CONFIG = {'AMQP_URI': "amqp://guest:guest@localhost"}
 @swag_from('docs/send.yml')
 def send():
     logger = app.logger
-
     try:
         type = request.json.get('type')
         body = request.json.get('body')
