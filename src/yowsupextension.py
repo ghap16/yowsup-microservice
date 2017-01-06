@@ -2,6 +2,7 @@ import pexpect
 import logging
 import random
 import sys
+import time
 
 from nameko.extensions import DependencyProvider
 
@@ -20,6 +21,8 @@ class YowsupExtension(DependencyProvider):
         strLogin = '/login %s %s' % (number, password)
         self.shell.sendline(strLogin)
         login = self.expect([".+\[connected\]:","Login Failed"],5)
+        time.sleep(random.randint(2,6))
+        self.shell.sendline('/presence available')
         if(login == 2):
             logging.info('Cannot login....cannot continue')
             exit()
@@ -44,18 +47,20 @@ class YowsupExtension(DependencyProvider):
         return i
 
     def sendTextMessage(self, address,message):
-        jid = address+'@s.whatsapp.net'
+        #jid = address+'@s.whatsapp.net'
 
         #Cambiar a estado a "En linea"
-        self.shell.sendline('/presence available')
-        random.randint(2,4)
+        #self.shell.sendline('/presence available')
+        #time.sleep(random.randint(2,4))
         #Cambiar a estado "Escribiendo..."
-        start_typing = '/state typing %s' % jid
-        self.shell.sendline(start_typing)
-        random.randint(3,6)
+        #start_typing = '/state typing %s' % jid
+        #self.shell.sendline(start_typing)
+        #time.sleep(random.randint(3,6))
         #Cambiar a estado "En linea"
-        stop_typing = '/state stoped %s' % jid
-        self.shell.sendline(stop_typing)
+        #stop_typing = '/state stoped %s' % jid
+        #self.shell.sendline(stop_typing)
+
+        time.sleep(random.randint(2,6))
 
         logging.info('Trying to send Message to %s:%s' % (address, message))
 
@@ -63,7 +68,7 @@ class YowsupExtension(DependencyProvider):
         self.shell.sendline(messageCommand)
 
         #Cambiar a estado "Desconectado"
-        self.shell.sendline('/presence unavailable')
+        #self.shell.sendline('/presence unavailable')
         
         return True
 
@@ -73,25 +78,28 @@ class YowsupExtension(DependencyProvider):
         basePath = '/mnt/nfs/difusion/'
         ###########################
         
-        jid = address+'@s.whatsapp.net'
+        #jid = address+'@s.whatsapp.net'
 
         #Cambiar a estado a "En linea"
-        self.shell.sendline('/presence available')
-        random.randint(2,4)
+        #self.shell.sendline('/presence available')
+        #time.sleep(random.randint(2,4))
         #Cambiar a estado "Escribiendo..."
-        start_typing = '/state typing %s' % jid
-        self.shell.sendline(start_typing)
-        random.randint(3,6)
+        #start_typing = '/state typing %s' % jid
+        #self.shell.sendline(start_typing)
+        #time.sleep(random.randint(3,6))
         #Cambiar a estado "En linea"
-        stop_typing = '/state stoped %s' % jid
-        self.shell.sendline(stop_typing)
+        #stop_typing = '/state stoped %s' % jid
+        #self.shell.sendline(stop_typing)
+
+        time.sleep(random.randint(2,6))
+
+        logging.info('Trying to send Image to %s:%s' % (address, message))
 
         messageCommand = '/image send %s %s%s' % (address, basePath, message)
-
         self.shell.sendline(messageCommand)
 
         #Cambiar a estado "Desconectado"
-        self.shell.sendline('/presence unavailable')
+        #self.shell.sendline('/presence unavailable')
 
     def get_dependency(self, worker_ctx):
         return self
